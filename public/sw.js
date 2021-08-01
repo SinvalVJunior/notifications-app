@@ -44,10 +44,8 @@ function subscribeUser() {
       navigator.serviceWorker.ready.then(function(reg) {
 
         console.log("Starting subscription");
-        let publicKey = "BETZY4598TinToe6XDeERjLgEnnu-iur3upWomSWfjDCfzQEExt8YgwDZuiV61qa-dvarW0o5I0_HRYXAsTS_qg"
         reg.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: publicKey
+          userVisibleOnly: true
         }).then(function(sub) {
           console.log('Endpoint URL: ', sub.endpoint);
         }).catch(function(e) {
