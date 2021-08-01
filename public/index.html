@@ -6,28 +6,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Special+Elite|Aldrich">
+    <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="index.css" />
     <title>Service Worker</title>
 </head>
 
 <body>
 
+    <header>
+        <h1>Velen</h1>
+        <h2>Conhecendo mais sobre uma região devastada pela guerra, situada na Teméria</h2>
+
+    </header>
+
     <h3>To get the full experience, please use mozilla firefox! :) </h3>
 
-    <button id="subscribe-button">Subscribe</button>
-
-    <button id="notification-button">Display a notification for me</button>
 
 
-    <h3 id="intro-endpoint"></h3>
-    <span id="endpoint-url"></span>
 
-    <div class="description"> 
-        <h4 id="url-description"></h4>
-    </div>
-    <div class="request"> 
-        <span id="post-request"></span>
-    </div>
+
+
+    <footer>
+        <img class="logo-rodape" src="images/map.jpg"
+            alt="Logo do canal do Youtube Assombrado composto por uma letra A dentro de um círculo e os dizeres 'O desconhecido levado a sério'">
+        <div>
+            <div>
+                <p>
+                    Anos mais tarde, diziam que aquele homem veio do norte, do Portão dos Cordoeiros.Chegou a pé,
+                    conduzindo seu cavalo pelas rédeas.
+                    Já era tarde; as barracas dos cordoeiros e seleiros estavam fechadas e a ruazinha, deserta. Fazia
+                    calor, mas o homem carregava uma
+                    pesada capa preta sobre os ombros.Chamava a atenção.
+                </p>
+                <button id="subscribe-button">Iniciar aventura</button>
+                <button id="notification-button">Preparar pra aventura</button>
+
+                <h3 id="intro-endpoint"></h3>
+                <span id="endpoint-url"></span>
+
+                <div class="description">
+                    <h4 id="url-description"></h4>
+                </div>
+                <div class="request">
+                    <span id="post-request"></span>
+                </div>
+
+            </div>
+        </div>
+    </footer>
 
     <script src="./sw.js"></script>
     <script src="./main.js"></script>
