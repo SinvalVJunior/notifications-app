@@ -30,33 +30,25 @@ function displayNotification() {
 
 let subscribeButton = document.getElementById("subscribe-button");
 subscribeButton.addEventListener("click", () => {
-  subscribeUser();
-  navigator.serviceWorker.getRegistration().then(function(reg) {
-    reg.pushManager.getSubscription().then((sub) => {
-      console.log("The subscription is");
-      console.log('Endpoint URL: ', sub.endpoint);
-    })
-  });
+  subscribeUserToPush();
 });
 
 
-function subscribeUser() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then(function(reg) {
+function subscribeUserToPush() {
+  return navigator.serviceWorker.register('/service-worker.js')
+  .then(function(registration) {
+    const subscribeOptions = {
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(
+        'BETZY4598TinToe6XDeERjLgEnnu-iur3upWomSWfjDCfzQEExt8YgwDZuiV61qa-dvarW0o5I0_HRYXAsTS_qg'
+      )
+    };
 
-      console.log("Starting subscription");
-      reg.pushManager.subscribe({
-        userVisibleOnly: true
-      }).then(function(sub) {
-        console.log('Endpoint URL: ', sub.endpoint);
-      }).catch(function(e) {
-        if (Notification.permission === 'denied') {
-          console.warn('Permission for notifications was denied');
-        } else {
-          console.error('Unable to subscribe to push', e);
-        }
-      });
-    })
-  }
+    return registration.pushManager.subscribe(subscribeOptions);
+  })
+  .then(function(pushSubscription) {
+    console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+    return pushSubscription;
+  });
 }
 
