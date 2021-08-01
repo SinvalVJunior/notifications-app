@@ -1,15 +1,12 @@
 Notification.requestPermission(function(status) {
     console.log('Notification permission status:', status);
-    if ('Notification' in window && navigator.serviceWorker) {
-        //displayNotification();
-    }
 });
 
 function displayNotification() {
     if (Notification.permission == 'granted') {
       navigator.serviceWorker.getRegistration().then(function(reg) {
         var options = {
-          body: 'Here is a notification body!',
+          body: 'This notification was generated with only Notifications API!',
           icon: 'images/sword.png',
           vibrate: [100, 50, 100],
           data: {
@@ -23,7 +20,7 @@ function displayNotification() {
               icon: 'images/xmark.png'},
           ]
         };
-        reg.showNotification('Hello world!', options);
+        reg.showNotification('Hello my friend!', options);
       });
     }
 }
@@ -32,6 +29,13 @@ let subscribeButton = document.getElementById("subscribe-button");
 subscribeButton.addEventListener("click", () => {
   subscribeUserToPush();
 });
+
+let notificationButton = document.getElementById("notification-button");
+notificationButton.addEventListener("click", () => {
+  displayNotification();
+});
+
+let pushEndpoint = "";
 
 
 function subscribeUserToPush() {
@@ -45,6 +49,29 @@ function subscribeUserToPush() {
     })
     .then(function (pushSubscription) {
       console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+      fillEndpointURL(pushSubscription.endpoint);
       return pushSubscription;
     });
+
 }
+const introEndpoint = "Your push endpoint is:";
+const urlDescription = "To test it, make a POST request to this endpoint with a TTL header:"
+function fillEndpointURL(endpoint) {
+  pushEndpoint = endpoint;
+
+  introEnpointH3 = document.getElementById("intro-endpoint");
+  introEnpointH3.innerHTML = introEndpoint;
+
+  urlSpan = document.getElementById("endpoint-url");
+  urlSpan.innerHTML = pushEndpoint;
+
+  descriptionSpan = document.getElementById("url-description");
+  descriptionSpan.innerHTML = urlDescription;
+
+
+  requestSpan = document.getElementById("post-request");
+  requestSpan.innerHTML = `curl \"${pushEndpoint}\"
+  --request POST --header \"TTL: 60\" --header \"Content-Length: 0\"`;
+}
+
+

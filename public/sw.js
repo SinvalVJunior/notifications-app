@@ -1,10 +1,26 @@
 
 askPermission();
 
+function askPermission() {
+  return new Promise(function (resolve, reject) {
+    const permissionResult = Notification.requestPermission(function (result) {
+      resolve(result);
+    });
+
+    if (permissionResult) {
+      permissionResult.then(resolve, reject);
+    }
+  })
+    .then(function (permissionResult) {
+      if (permissionResult !== 'granted') {
+        throw new Error('We weren\'t granted permission.');
+      } 
+    });
+}
 
 self.addEventListener('push', function (e) {
   var options = {
-    body: 'This notification was generated from a push!',
+    body: 'After a really long travel I\'m finallly here to deliver the good news: It worked!!!',
     icon: 'images/example.png',
     vibrate: [100, 50, 100],
     data: {
@@ -23,27 +39,9 @@ self.addEventListener('push', function (e) {
     ]
   };
   e.waitUntil(
-    self.registration.showNotification('Hello world!', options)
+    self.registration.showNotification('This notification was generated with the PushAPI!', options)
   );
 });
-
-
-function askPermission() {
-  return new Promise(function (resolve, reject) {
-    const permissionResult = Notification.requestPermission(function (result) {
-      resolve(result);
-    });
-
-    if (permissionResult) {
-      permissionResult.then(resolve, reject);
-    }
-  })
-    .then(function (permissionResult) {
-      if (permissionResult !== 'granted') {
-        throw new Error('We weren\'t granted permission.');
-      } 
-    });
-}
 
 
 
