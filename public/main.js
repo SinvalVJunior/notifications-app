@@ -31,6 +31,12 @@ function displayNotification() {
 let subscribeButton = document.getElementById("subscribe-button");
 subscribeButton.addEventListener("click", () => {
   subscribeUser();
+  navigator.serviceWorker.getRegistration().then(function(reg) {
+    reg.pushManager.getSubscription().then((sub) => {
+      console.log("The subscription is");
+      console.log('Endpoint URL: ', sub.endpoint);
+    })
+  });
 });
 
 
