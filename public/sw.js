@@ -42,6 +42,8 @@ self.addEventListener('push', function(e) {
 function subscribeUser() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.ready.then(function(reg) {
+
+        console.log("Starting subscription");
   
         reg.pushManager.subscribe({
           userVisibleOnly: true
