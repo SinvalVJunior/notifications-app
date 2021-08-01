@@ -28,6 +28,29 @@ function displayNotification() {
     }
 }
 
+let subscribeButton = document.getElementById("subscribe-button");
+subscribeButton.addEventListener("click", () => {
+  subscribeUserToPush();
+});
+
+
+function subscribeUserToPush() {
+  return navigator.serviceWorker.register('sw.js')
+    .then(function (registration) {
+      const subscribeOptions = {
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(
+          'BETZY4598TinToe6XDeERjLgEnnu-iur3upWomSWfjDCfzQEExt8YgwDZuiV61qa-dvarW0o5I0_HRYXAsTS_qg'
+        )
+      };
+
+      return registration.pushManager.subscribe(subscribeOptions);
+    })
+    .then(function (pushSubscription) {
+      console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+      return pushSubscription;
+    });
+}
 
 
 
