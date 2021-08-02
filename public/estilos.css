@@ -27,22 +27,6 @@ h1 + h2 {
   color: silver;
 }
 
-a:link {
-  color: rgb(0, 0, 0);
-}
-
-a:visited {
-  color: rgb(0, 0, 0);
-}
-
-a:hover {
-  color: white;
-}
-
-a:active {
-  color: red;
-}
-
 /* --- Cabeçalho --- */
 header {
   background-color: rgba(103, 52, 5, 0.95);

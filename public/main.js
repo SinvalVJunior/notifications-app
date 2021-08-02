@@ -6,7 +6,7 @@ function displayNotification() {
     if (Notification.permission == 'granted') {
       navigator.serviceWorker.getRegistration().then(function(reg) {
         var options = {
-          body: 'This notification was generated with only Notifications API!',
+          body: 'Você está pronto para começar a história? Inicie a aventura! ✅',
           icon: 'images/sword.png',
           vibrate: [100, 50, 100],
           data: {
